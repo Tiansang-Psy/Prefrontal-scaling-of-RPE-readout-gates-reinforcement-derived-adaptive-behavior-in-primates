@@ -1,7 +1,6 @@
-# Code and Software for: Prefrontal scaling of reward prediction error readout 1 gates reinforcement-derived adaptive behavior in primates
+# Code and Software for: Prefrontal scaling of reward prediction error readout gates reinforcement-derived adaptive behavior in primates
 
 ## Description
-
 This repository contains the source code, processed data, and analysis pipelines required to reproduce the findings of our study. The project integrates behavioral modeling (Python), bioinformatics/gene analysis (R), and single-trial prediction models (Python). For the fMRI univariate analysis (MATLAB/SPM), specific regressor settings and GLM parameters are detailed in the Methods section of the manuscript.
 
 ---
@@ -9,11 +8,9 @@ This repository contains the source code, processed data, and analysis pipelines
 ## 1. System Requirements
 
 ### Software Dependencies
-
 The analysis is distributed across three main environments:
 
 **A. Behavioral & Cognitive Modeling (Python)**
-
 - **Python Version:** 3.10.14
 - **Core Packages:** `pymc` (v5.15.1), `arviz` (v0.18.0), `pytensor` (v2.13.1), `numpy` (v1.26.4), `zarr` (v2.13.3).
 
@@ -33,7 +30,6 @@ The analysis is distributed across three main environments:
 - **Core Packages:** `scikit-learn` (v1.6.0), `scipy` (v1.14.1), `numpy` (v2.1.3).
 
 ### Hardware Requirements
-
 - **Standard Desktop Computer:** All analyses can be run on a standard computer with at least 16GB RAM. No non-standard hardware is required.
 
 ---
@@ -43,21 +39,20 @@ The analysis is distributed across three main environments:
 We recommend using `conda` to manage the different Python environments to ensure version compatibility.
 
 ### Step 1: Environment for Cognitive Modeling (Python 3.10)
-
 Following [PyMC official recommendations](https://www.pymc.io/projects/docs/en/latest/installation.html), use the `conda-forge` channel:
-
 ```bash
-conda create -c conda-forge -n bhv_model python=3.10.14 pymc=5.15.1 numpy=1.26.4 arviz=0.18.0 pytensor=2.13.1 zarr=2.13.3
+conda create -c conda-forge -n bhv_model python=3.10.14 pymc=5.15.1 pytensor=2.13.1 
+conda install numpy=1.26.4 
+pip install arviz=0.18.0 zarr=2.13.3
 ```
 
 ### Step 2: Environment for Single-Trial Prediction (Python 3.13)
-
 ```bash
-conda create -n prediction_model python=3.13.1 numpy=2.1.3 scipy=1.14.1 scikit-learn=1.6.0
+conda create -n prediction_model python=3.13.1 numpy=2.1.3 scipy=1.14.1 
+pip install -U scikit-learn=1.6.0
 ```
 
 ### Step 3: R & MATLAB Setup
-
 - **R:** Install the listed packages via `BiocManager::install()` or `install.packages()`.
 - **MATLAB:** Add SPM12 to your MATLAB path.
 
@@ -68,21 +63,24 @@ conda create -n prediction_model python=3.13.1 numpy=2.1.3 scipy=1.14.1 scikit-l
 ## 3. Demo & Instructions for Use
 
 ### Behavioral Analysis & Modeling Demo
-
-- **File:** `cognitive_modeling.ipynb`
+- **File:** `Fig1.ipynb/cognitive_modeling.py`
 - **Data:** Uses sample data for 3 human participants in `/data/`.
+- **Run:** `python cognitive_modeling.py > ./models/test_fitting/RW/Example_data_output.log 2>&1`
 - **Expected Output:** Parameter fits for alpha and beta, along with learning curve visualizations.
 - **Expected Run Time:** < 30 seconds for basic analysis. For parameter fitting with 3 participants, the run time is minimal but scales with the number of subjects and free parameters.
 
+### **Transcriptomic Analysis of Reward Processing Regions in Macaque and Human Brains** Demo
+
+All code used for the differential expression analyses, enrichment testing, network construction, and cell-type specificity assessments described above is openly available in the `Bioinformatics_Code_Archive/` directory. This repository contains fully documented scripts, processing pipelines, and comprehensive README files that enable replication of all results presented in this study. The `README.md` file within the archive provides detailed instructions for data access, software dependencies, and step-by-step execution of the analytical workflows. All intermediate data files, processed expression matrices, and generated visualization figures are also included to facilitate transparency and reproducibility.
+
 ### Single-Trial Prediction Demo
 
-- **File:** `single_trial_prediciton.ipynb`
-- **Data:** Uses sample data for 3 participants.
+- **File:** `single_trial_prediciton.py`
 - **Expected Output:** Model framework verification and prediction accuracy scores.
 - **Expected Run Time:** Based on the manuscript settings (100 repetitions of 5-fold cross-validation), the expected run time is approximately 1–2 hours.
+- To ensure full transparency, we have shared the complete code for our analysis framework. However, due to the volume and sensitivity of the data required to train a robust and stable model, the **full dataset** will be made publicly available upon the formal publication of the manuscript. In the interim, the complete raw and processed data are available from the authors upon reasonable request.
 
 ### Instructions for use on your own data
-
 To apply these analytical pipelines to your own data, please follow the specific guidelines for each module:
 
 **A. Behavioral Analysis & Cognitive Modeling**
@@ -120,7 +118,5 @@ To apply these analytical pipelines to your own data, please follow the specific
 - `Bioinfomatics_Code_Archive/`: Contains R scripts and specific README for Fig3/FigS7.
 
 ---
-
 ## License
-
 This project is licensed under the MIT License.
